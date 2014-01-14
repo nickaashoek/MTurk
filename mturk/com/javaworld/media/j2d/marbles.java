@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.Random;
 public class marbles extends Frame implements MouseListener{
 	public ArrayList<Ellipse2D> goodellipses =  new ArrayList<Ellipse2D>();
+	public int score=0;
 	public static void main(String[] args){
 		new marbles();
 	}
@@ -25,8 +26,16 @@ public class marbles extends Frame implements MouseListener{
 		Point2D point= evt.getPoint();
 		System.out.println("Mouse clicked at "+point);
 		for (Ellipse2D e:goodellipses){
-			if(e.contains(point))
-				System.out.println("Found in ellipse");
+			if(e.contains(point)){
+				score++;
+				System.out.println("Found in ellipse, total score is "+score);
+				int index = goodellipses.indexOf(e);
+				goodellipses.remove(index);
+				if(goodellipses.size()==0){
+					System.out.println("YOU WIN!!!!!");
+				}
+				break;
+			}
 		}
 	}
 	public void paint(Graphics g){
