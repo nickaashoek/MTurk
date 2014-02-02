@@ -28,6 +28,7 @@ public class Marbles {
 	private final static String ENDACTIVITY = "ENDACTIVITY";
 	private final static String FINALACTIVITY = "FINALACTIVITY";
 	public int guess = 0;
+	public int trueval = 0;
 	public int surity = 0;
 	
 	public static void main(String[] args) {
@@ -37,6 +38,8 @@ public class Marbles {
 	public Marbles() {
 		JFrame main = new JFrame("Java 2D");
 		main.setSize(400, 300);
+		MarbleDrawingComponent marbles = new MarbleDrawingComponent();
+		trueval = marbles.trueval;
 		final CardLayout mainCards = new CardLayout();
 		final JPanel mainPanel = new JPanel(mainCards);
 		main.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -58,7 +61,7 @@ public class Marbles {
 				// TODO Auto-generated method stub
 				guess = Integer.parseInt(tf.getText());
 				surity = Integer.parseInt(fintf.getText());
-				System.out.println("Guess: "+guess+"\nSurity: "+surity);
+				System.out.println("Guess: "+guess+"\nSurity: "+surity+"\nOff by: "+(trueval-guess));
 			}
 
 			@Override
@@ -170,7 +173,8 @@ public class Marbles {
 		});
 		introPanel.add(beginButton,BorderLayout.PAGE_END);
 		mainPanel.add(introPanel, INTROACTIVITY);
-		mainPanel.add(new MarbleDrawingComponent(), MAINACTIVITY);
+
+		mainPanel.add(marbles, MAINACTIVITY);
 		mainPanel.add(endPanel, ENDACTIVITY);
 		mainPanel.add(finalPanel, FINALACTIVITY);
 		main.add(mainPanel);
@@ -184,7 +188,7 @@ class MarbleDrawingComponent extends JComponent {
 	public ArrayList<Ellipse2D> goodellipses = new ArrayList<Ellipse2D>();
 	public ArrayList<Ellipse2D> badellipses = new ArrayList<Ellipse2D>();
 	public int score = 0;
-
+	public int trueval = 0;
 	private void generateEllipses() {
 		Random rand = new Random();
 		int number = rand.nextInt(80) + 50;
@@ -201,7 +205,7 @@ class MarbleDrawingComponent extends JComponent {
 			Ellipse2D e = new Ellipse2D.Double(x, y, 10, 10);
 			goodellipses.add(e);
 		}
-
+		trueval = number2;
 	}
 
 	public MarbleDrawingComponent() {
