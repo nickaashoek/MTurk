@@ -3,9 +3,12 @@ package com.javaworld.media.j2d;
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.geom.Ellipse2D;
@@ -13,11 +16,7 @@ import java.awt.geom.Point2D;
 import java.util.ArrayList;
 import java.util.Random;
 
-import javax.swing.JButton;
-import javax.swing.JComponent;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
+import javax.swing.*;
 
 public class Marbles {
 	/**
@@ -26,7 +25,11 @@ public class Marbles {
 	private static final long serialVersionUID = -6806601217744283298L;
 	private final static String MAINACTIVITY = "MAINACTIVITY";
 	private final static String INTROACTIVITY = "INTROACTIVITY";
-
+	private final static String ENDACTIVITY = "ENDACTIVITY";
+	private final static String FINALACTIVITY = "FINALACTIVITY";
+	public int guess = 0;
+	public int surity = 0;
+	
 	public static void main(String[] args) {
 		new Marbles();
 	}
@@ -38,7 +41,90 @@ public class Marbles {
 		final JPanel mainPanel = new JPanel(mainCards);
 		main.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		JPanel introPanel=new JPanel(new BorderLayout());
-		introPanel.add(new JLabel("INTRO goes here.",JLabel.CENTER),BorderLayout.CENTER);
+		JPanel finalPanel=new JPanel(new BorderLayout());
+		introPanel.add(new JLabel("Instructions",JLabel.CENTER),BorderLayout.CENTER);
+		JPanel endPanel=new JPanel(new BorderLayout());
+		endPanel.add(new JLabel("End",JLabel.CENTER),BorderLayout.CENTER);
+		JLabel el = new JLabel("Enter the number of orange circles you think there were");
+		JLabel el2 = new JLabel("Enter how far off you think you were");
+		final JTextField fintf = new JTextField();
+		final JTextField tf = new JTextField(1);
+		JButton endButton = new JButton("Next");
+		JButton finalButton = new JButton("Done");
+		finalButton.addMouseListener(new MouseListener(){
+
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				// TODO Auto-generated method stub
+				guess = Integer.parseInt(tf.getText());
+				surity = Integer.parseInt(fintf.getText());
+				System.out.println("Guess: "+guess+"\nSurity: "+surity);
+			}
+
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void mouseExited(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void mousePressed(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+		});
+		finalPanel.add(el2, BorderLayout.PAGE_START);
+		finalPanel.add(fintf, BorderLayout.CENTER);
+		finalPanel.add(finalButton, BorderLayout.PAGE_END);
+		endButton.addMouseListener(new MouseListener(){
+
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				// TODO Auto-generated method stub
+				mainCards.show(mainPanel, FINALACTIVITY);
+			}
+
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void mouseExited(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void mousePressed(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+		});
+		endPanel.add(tf);
+		endPanel.add(el, BorderLayout.PAGE_START);
+		endPanel.add(endButton, BorderLayout.PAGE_END);
 		JButton beginButton=new JButton("Begin!");
 		beginButton.addMouseListener(new MouseListener() {
 			
@@ -70,11 +156,23 @@ public class Marbles {
 			public void mouseClicked(MouseEvent arg0) {
 				// TODO Auto-generated method stub
 				mainCards.show(mainPanel, MAINACTIVITY);
+				Timer timer = new Timer(1000, null);
+				ActionListener taskPerformer = new ActionListener() {
+					public void actionPerformed(ActionEvent evt) {
+						mainCards.show(mainPanel, ENDACTIVITY);
+					}
+				};
+				timer.addActionListener(taskPerformer);
+				timer.setRepeats(false);
+				timer.start();
+				
 			}
 		});
 		introPanel.add(beginButton,BorderLayout.PAGE_END);
 		mainPanel.add(introPanel, INTROACTIVITY);
 		mainPanel.add(new MarbleDrawingComponent(), MAINACTIVITY);
+		mainPanel.add(endPanel, ENDACTIVITY);
+		mainPanel.add(finalPanel, FINALACTIVITY);
 		main.add(mainPanel);
 		main.setVisible(true);
 
@@ -108,52 +206,6 @@ class MarbleDrawingComponent extends JComponent {
 
 	public MarbleDrawingComponent() {
 		generateEllipses();
-		this.addMouseListener(new MouseListener() {
-
-			@Override
-			public void mousePressed(MouseEvent evt) {
-				Point2D point = evt.getPoint();
-				System.out.println("Mouse clicked at " + point);
-				for (Ellipse2D e : goodellipses) {
-					if (e.contains(point)) {
-						score++;
-						System.out.println("Found in ellipse, total score is "
-								+ score);
-						int index = goodellipses.indexOf(e);
-						goodellipses.remove(index);
-						if (goodellipses.size() == 0) {
-							System.out.println("YOU WIN!!!!!");
-						}
-						break;
-					}
-				}
-				repaint();
-			}
-
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				// TODO Auto-generated method stub
-
-			}
-
-			@Override
-			public void mouseEntered(MouseEvent e) {
-				// TODO Auto-generated method stub
-
-			}
-
-			@Override
-			public void mouseExited(MouseEvent e) {
-				// TODO Auto-generated method stub
-
-			}
-
-			@Override
-			public void mouseReleased(MouseEvent e) {
-				// TODO Auto-generated method stub
-
-			}
-		});
 	}
 
 	public void paintComponent(Graphics g) {
