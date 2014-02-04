@@ -3,7 +3,6 @@ package com.javaworld.media.j2d;
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
 import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
@@ -12,25 +11,31 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.geom.Ellipse2D;
-import java.awt.geom.Point2D;
 import java.util.ArrayList;
 import java.util.Random;
 
-import javax.swing.*;
+import javax.swing.JButton;
+import javax.swing.JComponent;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
+import javax.swing.Timer;
 
 public class Marbles {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = -6806601217744283298L;
 	private final static String MAINACTIVITY = "MAINACTIVITY";
 	private final static String INTROACTIVITY = "INTROACTIVITY";
 	private final static String ENDACTIVITY = "ENDACTIVITY";
 	private final static String FINALACTIVITY = "FINALACTIVITY";
+	private final static String RESULTS = "RESULTS";
 	public int guess = 0;
 	public int trueval = 0;
-	public int surity = 0;
-	
+	public int deviation = 0;
+
 	public static void main(String[] args) {
 		new Marbles();
 	}
@@ -43,118 +48,80 @@ public class Marbles {
 		final CardLayout mainCards = new CardLayout();
 		final JPanel mainPanel = new JPanel(mainCards);
 		main.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		JPanel introPanel=new JPanel(new BorderLayout());
-		JPanel finalPanel=new JPanel(new BorderLayout());
-		introPanel.add(new JLabel("Instructions",JLabel.CENTER),BorderLayout.CENTER);
-		JPanel endPanel=new JPanel(new BorderLayout());
-		endPanel.add(new JLabel("End",JLabel.CENTER),BorderLayout.CENTER);
-		JLabel el = new JLabel("Enter the number of orange circles you think there were");
-		JLabel el2 = new JLabel("Enter how far off you think you were");
-		final JTextField fintf = new JTextField();
-		final JTextField tf = new JTextField(1);
+		JPanel introPanel = new JPanel(new BorderLayout());
+		JPanel finalPanel = new JPanel(new BorderLayout());
+		JPanel resultPanel = new JPanel(new BorderLayout());
+		introPanel.add(new JLabel("<html><center>Hello!<br/><br/>You will be presented a field of blue and orange circles for a random amount of time.<br/>Your task is to count how many orange circles there are and report your best guess.</center></html>", JLabel.CENTER),
+				BorderLayout.CENTER);
+		JPanel endPanel = new JPanel(new BorderLayout());
+		endPanel.add(new JLabel("End", JLabel.CENTER), BorderLayout.CENTER);
+		JLabel guessLabel = new JLabel(
+				"Enter the number of orange circles you think there were");
+		JLabel deviationLabel = new JLabel(
+				"Enter how far off (in circles) you think you were");
+		JLabel resultsLabel = new JLabel("Done! Your reseults are:");
+		final JTextField deviationInput = new JTextField();
+		final JTextField guessInput = new JTextField();
+		final JTextArea finalOutput = new JTextArea();
+		finalOutput.setEditable(false);
 		JButton endButton = new JButton("Next");
 		JButton finalButton = new JButton("Done");
-		finalButton.addMouseListener(new MouseListener(){
+		finalButton.addActionListener(new ActionListener() {
 
 			@Override
-			public void mouseClicked(MouseEvent e) {
+			public void actionPerformed(ActionEvent arg0) {
 				// TODO Auto-generated method stub
-				guess = Integer.parseInt(tf.getText());
-				surity = Integer.parseInt(fintf.getText());
-				System.out.println("Guess: "+guess+"\nSurity: "+surity+"\nOff by: "+(trueval-guess));
+				guess = Integer.parseInt(guessInput.getText());
+				deviation = Integer.parseInt(deviationInput.getText());
+				finalOutput.setText("Guess: " + guess + "\nDeviation: "
+						+ deviation + "\nOff by: " + (trueval - guess));
+				mainCards.show(mainPanel, RESULTS);
 			}
-
-			@Override
-			public void mouseEntered(MouseEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
-
-			@Override
-			public void mouseExited(MouseEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
-
-			@Override
-			public void mousePressed(MouseEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
-
-			@Override
-			public void mouseReleased(MouseEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
-			
 		});
-		finalPanel.add(el2, BorderLayout.PAGE_START);
-		finalPanel.add(fintf, BorderLayout.CENTER);
+		finalPanel.add(deviationLabel, BorderLayout.PAGE_START);
+		finalPanel.add(deviationInput, BorderLayout.CENTER);
 		finalPanel.add(finalButton, BorderLayout.PAGE_END);
-		endButton.addMouseListener(new MouseListener(){
+		endButton.addActionListener(new ActionListener() {
 
 			@Override
-			public void mouseClicked(MouseEvent e) {
+			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
 				mainCards.show(mainPanel, FINALACTIVITY);
 			}
 
-			@Override
-			public void mouseEntered(MouseEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
-
-			@Override
-			public void mouseExited(MouseEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
-
-			@Override
-			public void mousePressed(MouseEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
-
-			@Override
-			public void mouseReleased(MouseEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
-			
 		});
-		endPanel.add(tf);
-		endPanel.add(el, BorderLayout.PAGE_START);
+		resultPanel.add(resultsLabel, BorderLayout.PAGE_START);
+		resultPanel.add(finalOutput);
+		endPanel.add(guessInput);
+		endPanel.add(guessLabel, BorderLayout.PAGE_START);
 		endPanel.add(endButton, BorderLayout.PAGE_END);
-		JButton beginButton=new JButton("Begin!");
+		JButton beginButton = new JButton("Begin!");
 		beginButton.addMouseListener(new MouseListener() {
-			
+
 			@Override
 			public void mouseReleased(MouseEvent arg0) {
 				// TODO Auto-generated method stub
-				
+
 			}
-			
+
 			@Override
 			public void mousePressed(MouseEvent arg0) {
 				// TODO Auto-generated method stub
-				
+
 			}
-			
+
 			@Override
 			public void mouseExited(MouseEvent arg0) {
 				// TODO Auto-generated method stub
-				
+
 			}
-			
+
 			@Override
 			public void mouseEntered(MouseEvent arg0) {
 				// TODO Auto-generated method stub
-				
+
 			}
-			
+
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
 				// TODO Auto-generated method stub
@@ -168,15 +135,16 @@ public class Marbles {
 				timer.addActionListener(taskPerformer);
 				timer.setRepeats(false);
 				timer.start();
-				
+
 			}
 		});
-		introPanel.add(beginButton,BorderLayout.PAGE_END);
+		introPanel.add(beginButton, BorderLayout.PAGE_END);
 		mainPanel.add(introPanel, INTROACTIVITY);
 
 		mainPanel.add(marbles, MAINACTIVITY);
 		mainPanel.add(endPanel, ENDACTIVITY);
 		mainPanel.add(finalPanel, FINALACTIVITY);
+		mainPanel.add(resultPanel, RESULTS);
 		main.add(mainPanel);
 		main.setVisible(true);
 
@@ -185,10 +153,15 @@ public class Marbles {
 }
 
 class MarbleDrawingComponent extends JComponent {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	public ArrayList<Ellipse2D> goodellipses = new ArrayList<Ellipse2D>();
 	public ArrayList<Ellipse2D> badellipses = new ArrayList<Ellipse2D>();
 	public int score = 0;
 	public int trueval = 0;
+
 	private void generateEllipses() {
 		Random rand = new Random();
 		int number = rand.nextInt(80) + 50;
