@@ -59,7 +59,7 @@ public class Marbles {
 				"Enter the number of orange circles you think there were");
 		JLabel deviationLabel = new JLabel(
 				"Enter how far off (in circles) you think you were");
-		JLabel resultsLabel = new JLabel("Done! Your reseults are:");
+		JLabel resultsLabel = new JLabel("Done! Your results are:");
 		final JTextField deviationInput = new JTextField();
 		final JTextField guessInput = new JTextField();
 		final JTextArea finalOutput = new JTextArea();
