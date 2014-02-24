@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Marbles</title>
+	<link rel="stylesheet" type="text/css" href="index.css">
+</head>
+
+<body>
+	<section id="intro">
+		<h1>Welcome</h1>
+		<div>In the next screen, you will be presented with a random assortment of 1 to 100 blue and 1 to 100 orange marbles for 1 to 5 seconds.</div>
+		<div>Your will be asked how many <b style="color:orange;">orange</b> marbles you thought there were, as well as how confident you were.</div>
+		<div>Your confidence and accuracy will both factor into your reward.</div>
+		<i>Example marbles</i>
+		<div>
+			<span class="marble-blue"></span><span class="marble-orange"></span>
+		</div>
+		<nav>
+			<button class="next" href="#main">Show the marbles &rarr;</button>
+		</nav>
+	</section>
+	<section id="main" style="display:none"></section>
+	<section id="observations" style="display:none">
+		<h1>Observations</h1>
+		<nav>
+			<button class="next" href="#results">Submit &rarr;</button>
+		</nav>
+	</section>
+	<section id="results" style="display:none">
+		<h1>Results</h1>
+	</section>
+	<script src="jquery-2.1.0.js"></script>
+	<script src="index.js"></script>
+</body>
+
+</html>
