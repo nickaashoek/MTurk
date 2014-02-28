@@ -31,7 +31,13 @@ $(".next").click(function() {
 		} else if(attr == "#results") {
 			//Submit
 			//Use this as a callback.
+			var seen = document.getElementById("numberseen").value
+			var uncertainty = parseInt(document.getElementById("certaintyselect").value)
 			$("body").find("#results").fadeIn(300);
+			document.getElementById("present").innerText += data.numberOrange
+			document.getElementById("guessed").innerText += seen
+			document.getElementById("error").innerText += data.numberOrange-seen
+			document.getElementById("errorguess").innerText += uncertainty
 		}else{
 			//Take the user to where the button is leading
 			$("body").find(that.attr("href")).fadeIn(300);
