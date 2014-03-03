@@ -38,6 +38,7 @@ $(".next").click(function() {
 			document.getElementById("guessed").innerText += seen
 			document.getElementById("error").innerText += data.numberOrange-seen
 			document.getElementById("errorguess").innerText += uncertainty
+			document.getElementById("time").innerText += (" "+Math.round(data.visibleFor*0.001)+" seconds to count")
 		}else{
 			//Take the user to where the button is leading
 			$("body").find(that.attr("href")).fadeIn(300);
