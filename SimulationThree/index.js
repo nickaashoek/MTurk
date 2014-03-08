@@ -1,6 +1,7 @@
 //(function() {
 var data = {
-	visibleFor: 1000 + Math.random() * 4000,
+	start:null,
+	end:null,
 	numberBlue: Math.floor(1 + Math.random() * 99),
 	numberOrange: Math.floor(1 + Math.random() * 99),
 
@@ -24,7 +25,16 @@ $(".next").click(function() {
 				$("#main").append(marble)
 			}
 			$("#main").fadeIn(0)
-		} else if(attr == "#results") {
+			data.start=Date.now();
+
+		}
+		else if(attr=="#observations"){
+			data.end=Date.now()
+			console.log("Spent: "+(data.end-data.start)/1000+" seconds")
+			$("#observations").fadeIn(300);
+		} 
+		else if(attr == "#results") {
+			$("#observations").fadeOut(0)
 			//Submit
 			//Use this as a callback.
 			var seen = document.getElementById("numberseen").value
@@ -34,7 +44,7 @@ $(".next").click(function() {
 			document.getElementById("guessed").innerText += seen
 			document.getElementById("error").innerText += data.numberOrange-seen
 			document.getElementById("errorguess").innerText += uncertainty
-			document.getElementById("time").innerText += (" "+Math.round(data.visibleFor*0.001)+" seconds to count")
+			document.getElementById("time").innerText+=" "+(data.end-data.start)/1000+" seconds counting the marbles";
 		}else{
 			//Take the user to where the button is leading
 			$("body").find(that.attr("href")).fadeIn(300);
