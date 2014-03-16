@@ -45,14 +45,14 @@ button {
 	color: #7B7BFF;
 	cursor: pointer;
 	padding: 10px;
-	background-color: transparent;
+	background-color: rgba(255,255,255,0.8);
 	outline:none;
 }
 button:hover {
-	background-color: #FAFAFA;
+	background-color: rgba(230,230,230,0.8);
 }
 button:active {
-	background-color: #EEEEEE;
+	background-color: rgba(210,210,210,0.8);
 }
 .marble-blue, .marble-orange {
 	display:inline-block;
@@ -70,4 +70,35 @@ button:active {
 .marble-orange {
 	border: 5px solid orange;
 	z-index: 1000;
+}
+/*Graph!*/
+#graph{
+	position: absolute;
+	top:auto;
+	height: auto;
+	z-index: -100000;
+}
+path {
+    stroke: steelblue;
+    stroke-width: 1;
+    fill: none;
+}
+.finishline{
+	stroke:green;
+}
+.axis {
+	/*shape-rendering: crispEdges;*/
+}
+
+.x.axis line {
+    stroke: lightgrey;
+}
+
+.axis .minor {
+    stroke-opacity: .5;
+}
+
+.axis line, .axis path {
+    fill: none;
+    stroke: #000;
 }
