@@ -54,6 +54,12 @@ button:hover {
 button:active {
 	background-color: #EEEEEE;
 }
+#observations:hover{
+	background-color: transparent;
+}
+nav.marbleend{
+	z-index: 10000;
+}
 .marble-blue, .marble-orange {
 	display:inline-block;
 	width:70px;
