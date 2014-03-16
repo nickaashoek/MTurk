@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Marbles</title>
+	<meta charset="utf-8">
+	<link rel="stylesheet" type="text/css" href="index.css">
+	<script src="http://www.parsecdn.com/js/parse-1.2.17.min.js"></script>
+</head>
+
+<body>
+	<section id="intro">
+		<h1>Welcome</h1>
+		<div>In the next screen, you will be presented with a random assortment of 1 to 100 <b style="color:blue;">blue</b> and 1 to 100 <b style="color:orange;">orange</b> marbles for 1 to 5 seconds.</div>
+		<div>Your will be asked how many <b style="color:orange;">orange</b> marbles you thought there were, as well as how confident you were.</div>
+		<div>Your confidence and accuracy will both factor into your reward.</div>
+		<i>Example marbles</i>
+		<div>
+			<span class="marble-blue"></span>
+			<span class="marble-orange"></span>
+		</div>
+		<nav>
+			<button class="next" href="#main">Show the marbles &rarr;</button>
+		</nav>
+	</section>
+	<section id="main" style="display:none"></section>
+	<section id="observations" style="display:none">
+		<h1>Observations</h1>
+		<div>How many orange marbles did you think were present?</div>
+		<div>
+			<input type="number" id="numberseen" value="0" min="0">orange marble(s)
+		</div>
+		<div>How certain are you of your previous answer?</div>
+		<div>
+			Within about
+			<select id="certaintyselect">
+				<option>1</option>
+				<option>2</option>
+				<option>5</option>
+				<option>10</option>
+				<option>15</option>
+				<option>20</option>
+				<option>25</option>
+				<option>50</option>
+			</select>orange marble(s)
+		</div>
+		<nav>
+			<button class="next" href="#results">Submit &rarr;</button>
+		</nav>
+	</section>
+	<section id="results" style="display:none">
+		<h1>Results</h1>
+		<ul id="results">
+			<div>You thought you saw <i id="guessed"></i> orange marble(s) give or take around <i id="errorguess"></i> marbles.</div>
+			<div>You were <b id="error"></b> marbles off.</div>
+			<div>There were actually <b id="present"></b> orange marbles.</div>
+			<div>Thanks for participating! You get $<b id="reward"></b>!</div>
+			<div>Would you like to <a href="">try again</a>?</div>
+		</ul>
+	</section>
+	<section id="graph" style="display:none"></section>
+	<script src="d3.js"></script>
+	<script src="jquery-2.1.0.js"></script>
+	<script src="index.js"></script>
+</body>
+
+</html>
