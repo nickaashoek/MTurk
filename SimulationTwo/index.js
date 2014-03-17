@@ -4,12 +4,12 @@ var SimulationTwo = Parse.Object.extend("SimulationTwo");
 var simulationTwo = new SimulationTwo();
 var maxReward = .25;
 var minReward = .01;
-var minNumberOrange = 1;
-var maxNumberOrange = 100;
+var minNumberOrange = 40;
+var maxNumberOrange = 200;
 var uncertaintyPenaltyFactor = 0.1;
 var deviationPenaltyFactor = 1;
 var data = {
-	visibleFor: 1000 + Math.random() * 4000,
+	visibleFor: 1000 + Math.random() * 7000,
 	numberBlue: Math.floor(1 + Math.random() * 99),
 	numberOrange: Math.floor(minNumberOrange + Math.random() * (maxNumberOrange - minNumberOrange + 1)),
 	seen: 0,
