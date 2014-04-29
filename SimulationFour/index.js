@@ -4,19 +4,19 @@
         simulationFour = new SimulationFour(),
         uncertainties = [{
             tolerance: 1,
-            reward: 0.25
+            reward: 35
         }, {
             tolerance: 2,
-            reward: 0.20
+            reward: 20
         }, {
             tolerance: 5,
-            reward: 0.10
+            reward: 10
         }, {
             tolerance: 10,
-            reward: 0.05
+            reward: 5
         }, {
             tolerance: 20,
-            reward: 0.01
+            reward: 1
         }],
         minNumberBlue = 40,
         maxNumberBlue = 200,
@@ -100,7 +100,7 @@
                                 var assignment = data.calibrated,
                                     won = Math.abs(assignment.seen - assignment.numberOrange) <= assignment.uncertainty.tolerance;
                                 $("#exclamation").text(won ? "Congratulations! You earned..." : "Unfortunately, you earned...");
-                                $("#money").text("$" + assignment.reward);
+                                $("#money").text(assignment.reward+" points");
                                 $("#explanation").html("You guessed that there were " +
                                     assignment.seen + " orange marbles.<br>" +
                                     (won ? "There were really " : "However, there were actually ") +
