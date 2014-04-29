@@ -110,6 +110,7 @@
                                     assignment.uncertainty.tolerance + " marble" +
                                     (assignment.uncertainty.tolerance == 1 ? "" : "s") +
                                     (won ? "! Enjoy the reward." : ", so no money was awarded."));
+                                $("#student .content").hide();
                                 $("#results").fadeIn(300);
                             });
                         });
