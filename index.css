@@ -1,104 +1,87 @@
 @font-face {
-	font-family:Roboto;
-	font-weight: 200;
-	src:url("Roboto-Light.ttf");
+    font-family:Roboto;
+    font-weight: 200;
+    src:url("Roboto-Light.ttf");
 }
 @font-face {
-	font-family:Roboto;
-	font-weight: 100;
-	src:url("Roboto-Thin.ttf");
+    font-family:Roboto;
+    font-weight: 100;
+    src:url("Roboto-Thin.ttf");
 }
 body {
-	font-family:Roboto, Arial, sans-serif;
-	font-size: 1.3em;
+    font-family:Roboto, Arial, sans-serif;
+    font-size: 1.3em;
 }
-body, section {
-	position: absolute;
-	margin: 0;
-	left: 0;
-	top: 0;
-	right: 0;
-	bottom: 0;
+body, section, article, #main, .content, .panel {
+    position: absolute;
+    margin: 0;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
 }
 section {
-	margin:40px;
+    margin:40px;
 }
 h1 {
-	margin-top: 0;
-	font-size: 3em;
-	font-weight: 100;
+    margin-top: 0;
+    font-size: 3em;
+    font-weight: 100;
 }
 div {
-	margin-bottom: 1em;
+    margin-bottom: 1em;
 }
 nav {
-	position: absolute;
-	right:0;
-	bottom: 0;
+    position: absolute;
+    right:0;
+    bottom: 0;
 }
 figcaption {
 }
 button {
-	border:none;
-	font-family: inherit;
-	font-size: 1.5em;
-	color: #7B7BFF;
-	cursor: pointer;
-	padding: 10px;
-	background-color: rgba(255,255,255,0.8);
-	outline:none;
+    border:none;
+    font-family: inherit;
+    font-size: 1.5em;
+    color: #7B7BFF;
+    cursor: pointer;
+    padding: 10px;
+    background-color: rgba(255, 255, 255, 0.8);
+    outline:none;
 }
 button:hover {
-	background-color: rgba(230,230,230,0.8);
+    background-color: rgba(230, 230, 230, 0.8);
 }
 button:active {
-	background-color: rgba(210,210,210,0.8);
+    background-color: rgba(210, 210, 210, 0.8);
 }
 .marble-blue, .marble-orange {
-	display:inline-block;
-	width:70px;
-	height: 70px;
-	margin:10px;
-	border-radius: 100%;
-	-webkit-border-radius: 100%;
-	-moz-border-radius: 100%;
+    display:inline-block;
+    width:70px;
+    height: 70px;
+    margin:10px;
+    border-radius: 100%;
+    -webkit-border-radius: 100%;
+    -moz-border-radius: 100%;
 }
 .marble-blue {
-	border: 5px solid blue;
-	z-index: 0;
+    border: 5px solid blue;
+    z-index: 0;
 }
 .marble-orange {
-	border: 5px solid orange;
-	z-index: 1000;
+    border: 5px solid orange;
+    z-index: 1000;
 }
-/*Graph!*/
-#graph{
-	position: absolute;
-	top:auto;
-	height: auto;
-	z-index: -100000;
+/*The marble-holder.*/
+article {
+    margin:0 100px 150px 0;
 }
-path {
-    stroke: steelblue;
-    stroke-width: 1;
-    fill: none;
+.panel {
+    left:50%;
+    border-left:2px solid #EEEEEE;
 }
-.finishline{
-	stroke:green;
-}
-.axis {
-	/*shape-rendering: crispEdges;*/
-}
-
-.x.axis line {
-    stroke: lightgrey;
-}
-
-.axis .minor {
-    stroke-opacity: .5;
-}
-
-.axis line, .axis path {
-    fill: none;
-    stroke: #000;
+.panel.left {
+    left:0;
+    right:50%;
+    border-left:none;
+    border-right:2px solid #EEEEEE;
 }

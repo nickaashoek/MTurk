@@ -2,66 +2,88 @@
 <html>
 
 <head>
-	<title>Marbles</title>
-	<meta charset="utf-8">
-	<link rel="stylesheet" type="text/css" href="index.css">
-	<script src="http://www.parsecdn.com/js/parse-1.2.17.min.js"></script>
+    <title>Marbles</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" type="text/css" href="index.css">
+    <script src="http://www.parsecdn.com/js/parse-1.2.17.min.js"></script>
 </head>
 
 <body>
-	<section id="intro">
-		<h1>Welcome</h1>
-		<div>In the next screen, you will be presented with a random assortment of 1 to 100 <b style="color:blue;">blue</b> and 1 to 100 <b style="color:orange;">orange</b> marbles for 1 to 5 seconds.</div>
-		<div>Your will be asked how many <b style="color:orange;">orange</b> marbles you thought there were, as well as how confident you were.</div>
-		<div>Your confidence and accuracy will both factor into your reward.</div>
-		<i>Example marbles</i>
-		<div>
-			<span class="marble-blue"></span>
-			<span class="marble-orange"></span>
-		</div>
-		<nav>
-			<button class="next" href="#main">Show the marbles &rarr;</button>
-		</nav>
-	</section>
-	<section id="main" style="display:none"></section>
-	<section id="observations" style="display:none">
-		<h1>Observations</h1>
-		<div>How many orange marbles did you think were present?</div>
-		<div>
-			<input type="number" id="numberseen" value="0" min="0">orange marble(s)
-		</div>
-		<div>How certain are you of your previous answer?</div>
-		<div>
-			Within about
-			<select id="certaintyselect">
-				<option>1</option>
-				<option>2</option>
-				<option>5</option>
-				<option>10</option>
-				<option>15</option>
-				<option>20</option>
-				<option>25</option>
-				<option>50</option>
-			</select>orange marble(s)
-		</div>
-		<nav>
-			<button class="next" href="#results">Submit &rarr;</button>
-		</nav>
-	</section>
-	<section id="results" style="display:none">
-		<h1>Results</h1>
-		<ul id="results">
-			<div>You thought you saw <i id="guessed"></i> orange marble(s) give or take around <i id="errorguess"></i> marbles.</div>
-			<div>You were <b id="error"></b> marbles off.</div>
-			<div>There were actually <b id="present"></b> orange marbles.</div>
-			<div>Thanks for participating! You get $<b id="reward"></b>!</div>
-			<div>Would you like to <a href="">try again</a>?</div>
-		</ul>
-	</section>
-	<section id="graph" style="display:none"></section>
-	<script src="d3.js"></script>
-	<script src="jquery-2.1.0.js"></script>
-	<script src="index.js"></script>
+    <section id="intro">
+        <h1>Welcome</h1>
+        In the next screen, you will be presented with two panels, side by side.
+        <br/>Each panel will contain a random assortment of 40 to 200 <b style="color:blue;">blue</b> and 20 to 100 <b style="color:orange;">orange</b> marbles for 1 to 5 seconds.
+        <br/>After you finish observing each panel, you will be asked
+        <ol>
+            <li>How many <b style="color:orange;">orange</b> marbles you thought there were in each panel, and</li>
+            <li>How confident you were about your guess.</li>
+        </ol>
+        A higher confidence yields a higher reward, awarded only if the actual number of marbles lands within a narrower range.
+        <br/>You will be rewarded <i>only for one</i> of the two panels after you complete <i>both!</i>
+        <br/>
+        <br/>
+        <i>Example marbles</i>
+        <div>
+            <span class="marble-blue"></span>
+            <span class="marble-orange"></span>
+        </div>
+        <nav>
+            <button class="next" href="#main">Show the Marbles &rarr;</button>
+        </nav>
+    </section>
+    <div id="main" style="display:none">
+        <div class="panel" id="calibrated">
+
+        </div>
+        <div class="panel" id="student">
+            <section id="results" style="display:none">
+                <h1>Final Reward</h1>
+                You were rewarded based on the results of the adjacent panel.
+                <br/>
+                <span id="exclamation">
+                    <!-- Congrats! you got... -->
+                </span>
+                <br/>
+                <strong id="money">
+                    <!-- One million dollars! -->
+                </strong>
+                <br/>
+                <span id="explanation">
+                    <!-- You won the lottery! Nice job. -->
+                </span>
+                <br/>Thanks for participating! Would you like to <a href=".">try again?</a>
+            </section>
+        </div>
+    </div>
+    <div class="content">
+        <section class="count">
+            <nav class="marbleend">
+                <button class="next" href="#observations">Finish Observation &rarr;</button>
+            </nav>
+        </section>
+        <section class="observations" style="display:none">
+            <h1>Observations</h1>
+            Please enter the number of orange marbles you think were present.
+            <br/>
+            <input type="number" class="numberseen todisable">
+            <br/>
+            <br/>Please enter your certainty that the number was correct.
+            <br/>
+            <select class="certaintyselect todisable">
+                <!-- 1, 2, 5, etc. -->
+            </select>
+            <p class="certaintyexplanation" style="display:none;">This means that if your guess <i> is within
+            <span class="within">
+                <!-- 10 marbles -->
+            </span> of the actual number shown</i>, you will get a reward of <b class="certaintyreward"><!-- $0.01 --></b>.</p>
+            <nav>
+                <button class="next" href="#results">Submit &rarr;</button>
+                <button class="done" style="display:none;">Submitted!</button>
+            </nav>
+        </section>
+    </div>
+    <script src="jquery-2.1.0.js"></script>
+    <script src="index.js"></script>
 </body>
 
 </html>
