@@ -90,7 +90,7 @@
                     context.find(".todisable").attr("disabled", "disabled");
                     context.find(".next").hide();
                     context.find(".done").show();
-                    assignment.reward = Math.abs(assignment.seen - assignment.actual) <= assignment.uncertainty.tolerance ? assignment.uncertainty.reward : 0;
+                    assignment.reward = Math.abs(assignment.seen - assignment.numberOrange) <= assignment.uncertainty.tolerance ? assignment.uncertainty.reward : 0;
                     completed++;
                     if (completed >= 2) {
                         //We are done
@@ -98,7 +98,7 @@
                             $("#student .observations").fadeOut(300, function () {
                                 //Prepare results
                                 var assignment = data.calibrated,
-                                    won = Math.abs(assignment.seen - assignment.actual) <= assignment.uncertainty.tolerance;
+                                    won = Math.abs(assignment.seen - assignment.numberOrange) <= assignment.uncertainty.tolerance;
                                 $("#exclamation").text(won ? "Congratulations! You earned..." : "Unfortunately, you earned...");
                                 $("#money").text("$" + assignment.reward);
                                 $("#explanation").html("You guessed that there were " +
